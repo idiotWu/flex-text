@@ -1,6 +1,6 @@
 # flex-text
 
-Mastering font-size like flexbox!
+Mastering font-size like flexbox for **IE 8+**!
 
 ![screenshot](https://raw.githubusercontent.com/idiotWu/flex-text/master/demo/screenshot.gif)
 
