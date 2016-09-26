@@ -3,6 +3,7 @@
   width: 100px;
   border: 1px solid #abc;
   letter-spacing: -0.31em;
+  white-space: nowrap;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
