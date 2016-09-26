@@ -1,18 +1,18 @@
-(function umdDefine(root, factory) {
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['exports'], factory);
-    } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
-        // CommonJS
-        factory(exports);
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
     } else {
-        // Browser globals
-        factory(root);
+        // Browser globals (root is window)
+        root.FlexText = factory();
     }
-}(this, function factory(exports) {
+}(this, function () {
     'use strict';
-
-    exports.FlexText = FlexText;
 
     // init measuring element
     var span = document.createElement('span');
@@ -224,4 +224,6 @@
             self.render();
         });
     };
+
+    return FlexText;
 }));
