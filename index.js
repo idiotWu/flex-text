@@ -1,15 +1,15 @@
 (function umdDefine(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['exports', 'b'], factory);
+        define(['exports'], factory);
     } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
         // CommonJS
-        factory(exports, require('b'));
+        factory(exports);
     } else {
         // Browser globals
-        factory(root, root.b);
+        factory(root);
     }
-}(this, function factory(exports, b) {
+}(this, function factory(exports) {
     'use strict';
 
     exports.FlexText = FlexText;
