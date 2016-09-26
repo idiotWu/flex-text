@@ -157,7 +157,7 @@
         var styles = this.styles;
         var container = this.container;
 
-        var totalSpace = container.getBoundingClientRect().width;
+        var totalSpace = container.clientWidth;
 
         var widths = [];
         var totalWidth = 0;
@@ -171,17 +171,17 @@
             var elem = item.elem;
             var flex = item.flex;
 
-            var text = elem.textContent;
+            var text = elem.textContent || elem.innerText;
             var fontSize = BASE_FONT_SIZE * flex;
 
             if (!text && whiteSpaceCount > 0) {
                 whiteSpaceCount--;
             }
 
-            span.textContent = text;
+            span.textContent = span.innerText = text;
             span.style.fontSize = fontSize + 'px';
 
-            var width = span.getBoundingClientRect().width;
+            var width = span.clientWidth;
 
             widths.push(width);
             totalWidth += width;

@@ -4,9 +4,9 @@ var dollar = document.querySelector('#dollar');
 var spacing = document.querySelector('#spacing');
 var container = document.querySelector('.dollar');
 
-var sizeVal = size.previousElementSibling;
-var dollarVal = dollar.previousElementSibling;
-var spacingVal = spacing.previousElementSibling;
+var sizeVal = document.querySelector('#size-val');
+var dollarVal = document.querySelector('#dollar-val');
+var spacingVal = document.querySelector('#spacing-val');
 
 var intPart = document.querySelector('.integer');
 var floatPart = document.querySelector('.float');
@@ -60,22 +60,22 @@ forEach([
     attachEvent(size, type, function () {
         var value = size.value;
         container.style.width = value + 'px';
-        sizeVal.textContent = value;
+        sizeVal.textContent = sizeVal.innerText = value;
         flexText.update();
     });
     attachEvent(spacing, type, function () {
         var value = spacing.value;
-        spacingVal.textContent = value;
+        spacingVal.textContent = spacingVal.innerText = value;
         flexText.extendStyles({ spacing: value });
         flexText.update();
     });
     attachEvent(dollar, type, function () {
         var value = dollar.value;
         var p = value.split('.');
-        dollarVal.textContent = value;
-        intPart.textContent = p[0];
-        floatPart.textContent = p[1];
-        dotPart.textContent = p[1] ? '.' : '';
+        dollarVal.textContent = dollarVal.innerText = value;
+        intPart.textContent = intPart.innerText = p[0];
+        floatPart.textContent = floatPart.innerText = p[1];
+        dotPart.textContent = dotPart.innerText = p[1] ? '.' : '';
         flexText.update();
     });
 });
