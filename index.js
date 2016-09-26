@@ -15,7 +15,7 @@
     exports.FlexText = FlexText;
 
     // init measuring element
-    const span = document.createElement('span');
+    var span = document.createElement('span');
     span.style.visibility = 'hidden';
     span.style.position = 'absolute';
     span.style.top = '99999999px';
