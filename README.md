@@ -44,7 +44,7 @@ const flexText = new FlexText({
 
 ### Unwanted white space:
 
-You may get white spaces around flex items when they're layouted as `inline-block`, here's a little trick to it:
+You may get white spaces around flex items when they are layouted as `inline-block`, here's a little trick to it:
 
 ```css
 .container {
@@ -95,6 +95,7 @@ A list of flex items:
     elem: element,  // the flex item
     flex: number,   // flex factor, like css flex-grow property
 }, ...]
+```
 
 You can also add single flex item by calling `instance#addItem()`.
 
