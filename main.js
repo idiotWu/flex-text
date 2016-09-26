@@ -45,23 +45,31 @@ function forEach(arr, fn) {
     }
 }
 
+function attachEvent(elem, type, handler) {
+    if (typeof elem.addEventListener === 'function') {
+        return elem.addEventListener(handler);
+    }
+
+    elem.attachEvent('on' + type, handler);
+}
+
 forEach([
     'input',
     'change',
 ], function (type) {
-    size.addEventListener(type, function () {
+    attachEvent(size, type, function () {
         var value = size.value;
         container.style.width = value + 'px';
         sizeVal.textContent = value;
         flexText.update();
     });
-    spacing.addEventListener(type, function () {
+    attachEvent(spacing, type, function () {
         var value = spacing.value;
         spacingVal.textContent = value;
         flexText.extendStyles({ spacing: value });
         flexText.update();
     });
-    dollar.addEventListener(type, function () {
+    attachEvent(dollar, type, function () {
         var value = dollar.value;
         var p = value.split('.');
         dollarVal.textContent = value;
