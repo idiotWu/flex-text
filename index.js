@@ -157,10 +157,12 @@
         var styles = this.styles;
         var container = this.container;
 
-        var totalSpace = container.getBoundingClientRect().width - parseFloat(styles.spacing) * (items.length - 1);
+        var totalSpace = container.getBoundingClientRect().width;
 
         var widths = [];
         var totalWidth = 0;
+
+        var whiteSpaceCount = items.length - 1;
 
         span.style.fontWeight = styles.fontWeight;
         span.style.fontFamily = styles.fontFamily;
@@ -169,16 +171,23 @@
             var elem = item.elem;
             var flex = item.flex;
 
+            var text = elem.textContent;
             var fontSize = BASE_FONT_SIZE * flex;
 
+            if (!text && whiteSpaceCount > 0) {
+                whiteSpaceCount--;
+            }
+
+            span.textContent = text;
             span.style.fontSize = fontSize + 'px';
-            span.textContent = elem.textContent;
 
             var width = span.getBoundingClientRect().width;
 
             widths.push(width);
             totalWidth += width;
         });
+
+        totalSpace -= parseFloat(styles.spacing) * whiteSpaceCount;
 
         return map(widths, function (w, i) {
             var flex = items[i].flex;
