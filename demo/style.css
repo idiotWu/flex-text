@@ -1,0 +1,37 @@
+.dollar {
+  color: #da2b50;
+  width: 100px;
+  border: 1px solid #abc;
+  letter-spacing: -0.31em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.dollar > span {
+  display: inline-block;
+  vertical-align: top;
+  outline: 1px solid;
+  letter-spacing: normal;
+}
+
+.integer {
+  font-size: 2em;
+}
+
+[data-desc] {
+  display: inline-block;
+  width: 10em;
+}
+[data-desc]::before {
+  content: attr(data-desc) ":";
+  width: 10em;
+}
+
+#ctrl {
+  margin-bottom: 1em;
+}
