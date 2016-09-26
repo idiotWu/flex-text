@@ -1,6 +1,6 @@
 {
   "name": "flex-text",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Mastering font-size like flexbox!",
   "main": "index.js",
   "scripts": {
