@@ -1,6 +1,10 @@
 # flex-text
 
-Mastering font-size like flexbox for **IE 8+**!
+Mastering font-size like flexbox for **IE 8+**:
+
+```
+font-size A:B:C:D = 1:2:1:1
+```
 
 ![screenshot](https://raw.githubusercontent.com/idiotWu/flex-text/master/demo/screenshot.gif)
 
