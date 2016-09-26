@@ -34,10 +34,21 @@ var flexText = new FlexText({
         },
     ],
 });
-[
+
+function forEach(arr, fn) {
+    if (typeof arr.forEach === 'function') {
+        return arr.forEach(fn);
+    }
+
+    for (var i = 0, max = arr.length; i < max; i++) {
+        fn(arr[i], i, arr);
+    }
+}
+
+forEach([
     'input',
     'change',
-].forEach(function (type) {
+], function (type) {
     size.addEventListener(type, function () {
         var value = size.value;
         container.style.width = value + 'px';
