@@ -47,7 +47,7 @@ function forEach(arr, fn) {
 
 function attachEvent(elem, type, handler) {
     if (typeof elem.addEventListener === 'function') {
-        return elem.addEventListener(handler);
+        return elem.addEventListener(type, handler);
     }
 
     elem.attachEvent('on' + type, handler);
