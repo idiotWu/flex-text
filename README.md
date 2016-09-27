@@ -58,7 +58,7 @@ You may get white spaces around flex items when they are layouted as `inline-blo
 
 ### Canvas vs Legacy Element
 
-This plugin does text measuring with `<span>` element. As a result, the created `<span>` element must be inserted into document so that we can measure boundings. Text measuring with canvas is easier and will calculate at a higher performace. However, using legacy elements keeps us from incompatibility :)
+This plugin does text measuring with `<span>` element. As a result, the created `<span>` element must be inserted into document so that we can measure boundings. Text measuring with canvas is easier and will calculate at a higher performace. However, using legacy elements keeps us away from incompatibility :)
 
 That's also the reason why I wrote it in es5 flavor.
 
