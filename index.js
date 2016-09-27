@@ -17,7 +17,7 @@
     // init measuring element
     var span = document.createElement('span');
     span.style.visibility = 'hidden';
-    span.style.position = 'absolute';
+    span.style.position = 'fixed';
     span.style.top = '99999999px';
 
     document.body.appendChild(span);
@@ -80,7 +80,8 @@
         options = options || {};
 
         this.items = [];
-        this.spacing = options.spacing || 0;
+
+        this.setSpacing(options.spacing);
 
         if (options.items && options.items.length) {
             var self = this;
