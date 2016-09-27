@@ -60,13 +60,15 @@ That's also the reason why I wrote it in es5 flavor.
 
 ## APIs
 
-### new FlexText(options: object)
+### new FlexText([options: object])
 
 Construct new instance with supported options:
 
 #### container: element
 
 The element that holds all flex items.
+
+You can set container later by calling `instance#attachTo()`
 
 #### spacing: number
 
@@ -94,6 +96,10 @@ Update DOM layout at next frame.
 ### instance#setSpacing(value: number)
 
 Change white space between items.
+
+### instance#attachTo(container: element)
+
+Set the container element.
 
 ### instance#addItem(item: object)
 
