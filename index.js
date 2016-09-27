@@ -212,7 +212,7 @@
             elem.style.fontSize = Math.floor(result[idx]) + 'px';
 
             if (idx > 0) {
-                elem.style.paddingLeft = spacing + 'px';
+                elem.style.marginLeft = spacing + 'px';
             }
         });
     };
