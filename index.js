@@ -195,7 +195,7 @@
             var fontSize = BASE_FONT_SIZE * flex;
             var targetWidth = (w / totalWidth) * totalSpace;
 
-            return fontSize / (w / targetWidth);
+            return Math.max(0, fontSize / (w / targetWidth));
         });
     };
 
