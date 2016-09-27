@@ -25,11 +25,7 @@ import FlexText from 'flex-text';
 
 const flexText = new FlexText({
     container: document.querySelector('.container'),
-    styles: {
-        fontFamily: 'Arial, sans-serif',
-        fontWeight: 'bold',
-        spacing: 0,
-    },
+    spacing: 0,
     items: [{
         elem: document.querySelector('.first'),
         flex: 1,
@@ -72,19 +68,11 @@ Construct new instance with supported options:
 
 The element that holds all flex items.
 
-#### styles: object
+#### spacing: number
 
-Basic styles for text rendering:
+White space between each item.
 
-```javascript
-{
-    fontFamily: string,  // css font-family string
-    fontWeight: string,  // css font-weight string
-    spacing: number,     // spacing around each flex item
-}
-```
-
-You can also extend styles by calling `instance#extendStyles()`.
+You can also modify spacing by calling `instance#setSpacing()`.
 
 #### items: array
 
@@ -99,25 +87,21 @@ A list of flex items:
 
 You can also add single flex item by calling `instance#addItem()`.
 
-### FlexText.setDefaultStyles(styles: object)
+### instance#update()
 
-Extend the default styles which is:
+Update DOM layout at next frame.
 
-```javascript
-{
-    fontFamily: 'sans-serif',
-    fontWeight: 'normal',
-    spacing: 0,
-}
-```
+### instance#setSpacing(value: number)
 
-### instance#extendStyles(styles: object)
-
-Extend styles on current instance.
+Change white space between items.
 
 ### instance#addItem(item: object)
 
 Add single flex item.
+
+### instance#remove(elem: element)
+
+Remove item from list by giving `item.elem`.
 
 ### instance#alloc()
 
@@ -126,10 +110,6 @@ Measuring font-size and returning the result like:
 ```javascipt
 [16.123124, 68.12351, ...]
 ```
-
-### instance#update()
-
-Update DOM layout at next frame.
 
 ## License
 
