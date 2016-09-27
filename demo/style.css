@@ -12,6 +12,7 @@
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
           align-items: flex-start;
+  font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuan Yi Micro Hei", sans-serif;
 }
 .dollar > span {
   display: inline-block;

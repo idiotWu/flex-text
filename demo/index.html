@@ -11,8 +11,8 @@
     <h1>Flexible Text</h1>
     <div id="ctrl">
         <div>
-            <span id="size-val" data-desc="size">100</span>
-            <input type="range" id="size" min="100" max="1000" step="10" value="100" />
+            <span id="width-val" data-desc="width">100</span>
+            <input type="range" id="width" min="100" max="1000" step="10" value="100" />
         </div>
         <div>
             <span id="spacing-val" data-desc="spacing">0</span>
@@ -21,6 +21,13 @@
         <div>
             <span id="dollar-val" data-desc="dollar">2.33</span>
             <input type="range" id="dollar" min="1" max="100" step="0.001" value="2.33" />
+        </div>
+        <div>
+            <span id="ratio-val" data-desc="flex-ratio">1:2:1:1</span>
+            <input type="range" data-id="1" class="flex-ratio" min="0.1" max="10" step="0.1" value="1">
+            <input type="range" data-id="2" class="flex-ratio" min="0.1" max="10" step="0.1" value="2">
+            <input type="range" data-id="3" class="flex-ratio" min="0.1" max="10" step="0.1" value="1">
+            <input type="range" data-id="4" class="flex-ratio" min="0.1" max="10" step="0.1" value="1">
         </div>
     </div>
     <div class="dollar">
