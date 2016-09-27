@@ -23,11 +23,6 @@
     document.body.appendChild(span);
 
     var BASE_FONT_SIZE = 100;
-    var DEFAULT_STYLES = {
-        fontFamily: 'sans-serif',
-        fontWeight: 'normal',
-        spacing: 0,
-    };
 
     function async(fn) {
         if (typeof window.requestAnimationFrame === 'function') {
@@ -45,26 +40,16 @@
         return true;
     }
 
-    function extend() {
-        if (typeof Object.assign === 'function') {
-            return Object.assign.apply(Object, arguments);
+    function getStyle(el, prop) {
+        if (typeof window.getComputedStyle === 'function') {
+            return getComputedStyle(el)[prop];
         }
 
-        var dest = arguments[0];
+        prop = prop.replace(/-(\w)/g, function (m, $1) {
+            return $1.toUpperCase();
+        });
 
-        for (var i = 1, max = arguments.length; i < max; i++) {
-            var src = arguments[i];
-
-            if (!src) {
-                continue;
-            }
-
-            for (var prop in src) {
-                dest[prop] = src[prop];
-            }
-        }
-
-        return dest;
+        return el.currentStyle[prop];
     }
 
     function forEach(arr, fn) {
@@ -95,11 +80,7 @@
         options = options || {};
 
         this.items = [];
-        this.styles = extend({}, DEFAULT_STYLES);
-
-        if (options.styles) {
-            this.extendStyles(options.styles);
-        }
+        this.spacing = options.spacing || 0;
 
         if (options.items && options.items.length) {
             var self = this;
@@ -114,20 +95,15 @@
         }
     }
 
-    FlexText.setDefaultStyles = function setDefaultStyles(styles) {
-        return extend(DEFAULT_STYLES, styles);
-    };
-
-    FlexText.prototype.extendStyles = function extendStyles(styles) {
-        extend(this.styles, styles);
-        return extend({}, this.styles);
-    };
-
     FlexText.prototype.attachTo = function attachTo(container) {
         checkElem(container, 'container');
 
         this.container = container;
         this.update();
+    };
+
+    FlexText.prototype.setSpacing = function setSpacing(val) {
+        this.spacing = parseFloat(val) || 0;
     };
 
     FlexText.prototype.addItem = function addItem(item) {
@@ -139,22 +115,27 @@
             throw new Error('expect flex to be greater than 0, but got ' + item.flex);
         }
 
-        this.items.push(extend({}, item));
+        this.items.push({
+            elem: item.elem,
+            flex: item.flex,
+        });
     };
 
     FlexText.prototype.removeItem = function removeItem(elem) {
         checkElem(elem, 'elem');
 
-        forEach(this.items, function (v, i, a) {
-            if (elem === v.elem) {
-                a.splice(i, 1);
+        var items = this.items;
+
+        for (var i = 0, max = items.length; i < max; i++) {
+            if (elem === items[i].elem) {
+                return items.splice(i, 1);
             }
-        });
+        }
     };
 
     FlexText.prototype.alloc = function alloc() {
         var items = this.items;
-        var styles = this.styles;
+        var spacing = this.spacing;
         var container = this.container;
 
         var totalSpace = container.clientWidth;
@@ -163,9 +144,6 @@
         var totalWidth = 0;
 
         var whiteSpaceCount = items.length - 1;
-
-        span.style.fontWeight = styles.fontWeight;
-        span.style.fontFamily = styles.fontFamily;
 
         forEach(items, function (item) {
             var elem = item.elem;
@@ -178,8 +156,11 @@
                 whiteSpaceCount--;
             }
 
-            span.textContent = span.innerText = text;
+            span.style.fontWeight = getStyle(elem, 'font-weight');
+            span.style.fontFamily = getStyle(elem, 'font-family');
             span.style.fontSize = fontSize + 'px';
+
+            span.textContent = span.innerText = text;
 
             var width = span.clientWidth;
 
@@ -187,7 +168,7 @@
             totalWidth += width;
         });
 
-        totalSpace -= parseFloat(styles.spacing) * whiteSpaceCount;
+        totalSpace -= parseFloat(spacing) * whiteSpaceCount;
 
         return map(widths, function (w, i) {
             var flex = items[i].flex;
@@ -200,15 +181,13 @@
     };
 
     FlexText.prototype.render = function render() {
-        var spacing = this.styles.spacing;
-        var fontFamily = this.styles.fontFamily;
+        var spacing = this.spacing;
 
         var result = this.alloc();
 
         forEach(this.items, function (item, idx) {
             var elem = item.elem;
 
-            elem.style.fontFamily = fontFamily;
             elem.style.fontSize = Math.floor(result[idx]) + 'px';
 
             if (idx > 0) {
