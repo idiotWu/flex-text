@@ -52,6 +52,12 @@
         return el.currentStyle[prop];
     }
 
+    function getWidth(el) {
+        var bound = el.getBoundingClientRect();
+
+        return bound.width || (bound.right - bound.left);
+    };
+
     function forEach(arr, fn) {
         if (typeof arr.forEach === 'function') {
             return arr.forEach(fn);
@@ -134,12 +140,16 @@
         }
     };
 
+    FlexText.prototype.clear = function clear() {
+        this.items.length = 0;
+    };
+
     FlexText.prototype.alloc = function alloc() {
         var items = this.items;
         var spacing = this.spacing;
         var container = this.container;
 
-        var totalSpace = container.clientWidth;
+        var totalSpace = getWidth(container);
 
         var widths = [];
         var totalWidth = 0;
@@ -163,7 +173,7 @@
 
             span.textContent = span.innerText = text;
 
-            var width = span.clientWidth;
+            var width = getWidth(span);
 
             widths.push(width);
             totalWidth += width;
@@ -172,12 +182,15 @@
         totalSpace -= parseFloat(spacing) * whiteSpaceCount;
 
         return map(widths, function (w, i) {
-            var flex = items[i].flex;
+            var item = items[i];
 
-            var fontSize = BASE_FONT_SIZE * flex;
+            var fontSize = BASE_FONT_SIZE * item.flex;
             var targetWidth = (w / totalWidth) * totalSpace;
 
-            return Math.max(0, fontSize / (w / targetWidth));
+            return {
+                elem: item.elem,
+                fontSize: Math.max(0, fontSize / (w / targetWidth)),
+            };
         });
     };
 
@@ -186,10 +199,11 @@
 
         var result = this.alloc();
 
-        forEach(this.items, function (item, idx) {
+        forEach(result, function (item, idx) {
             var elem = item.elem;
+            var fontSize = item.fontSize;
 
-            elem.style.fontSize = Math.floor(result[idx]) + 'px';
+            elem.style.fontSize = Math.floor(fontSize) + 'px';
 
             if (idx > 0) {
                 elem.style.marginLeft = spacing + 'px';
