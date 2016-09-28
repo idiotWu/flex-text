@@ -109,12 +109,19 @@ Add single flex item.
 
 Remove item from list by giving `item.elem`.
 
+### instance#clear()
+
+Remove all flex items.
+
 ### instance#alloc()
 
 Measuring font-size and returning the result like:
 
 ```javascipt
-[16.123124, 68.12351, ...]
+[{
+    elem: DOMElement,
+    fontSize: 123,
+}, ...]
 ```
 
 ## License
