@@ -1,5 +1,9 @@
 # flex-text
 
+[![npm](https://img.shields.io/npm/v/flex-text.svg?style=flat-square)](https://www.npmjs.com/package/flex-text)
+[![npm](https://img.shields.io/npm/dt/flex-text.svg?style=flat-square)](https://www.npmjs.com/package/flex-text)
+[![npm](https://img.shields.io/npm/l/flex-text.svg?style=flat-square)](https://www.npmjs.com/package/flex-text)
+
 Mastering font-size like flexbox for **IE 8+**:
 
 ```
@@ -101,7 +105,7 @@ Change white space between items.
 
 Set the container element.
 
-### instance#addItem(elem: element[, flex: number])
+### instance#addItem(elem: element [, flex: number])
 
 Add single flex item, default `flex` is `1`.
 
