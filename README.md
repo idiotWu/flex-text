@@ -105,7 +105,7 @@ Set the container element.
 
 Add single flex item.
 
-### instance#remove(elem: element)
+### instance#removeItem(elem: element)
 
 Remove item from list by giving `item.elem`.
 
