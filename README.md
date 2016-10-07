@@ -101,9 +101,9 @@ Change white space between items.
 
 Set the container element.
 
-### instance#addItem(item: object)
+### instance#addItem(elem: element[, flex: number])
 
-Add single flex item.
+Add single flex item, default `flex` is `1`.
 
 ### instance#removeItem(elem: element)
 
