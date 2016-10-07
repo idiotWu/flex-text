@@ -93,7 +93,9 @@
             var self = this;
 
             forEach(options.items, function (v) {
-                self.addItem(v);
+                if (v && v.elem) {
+                    self.addItem(v.elem, v.flex);
+                }
             });
         }
 
@@ -113,18 +115,18 @@
         this.spacing = parseFloat(val) || 0;
     };
 
-    FlexText.prototype.addItem = function addItem(item) {
-        if (!item) return;
+    FlexText.prototype.addItem = function addItem(elem, flex) {
+        checkElem(elem, 'elem');
 
-        checkElem(item.elem, 'elem');
+        flex = flex || 1;
 
-        if (item.flex <= 0) {
-            throw new Error('expect flex to be greater than 0, but got ' + item.flex);
+        if (flex <= 0) {
+            throw new Error('expect flex to be greater than 0, but got ' + flex);
         }
 
         this.items.push({
-            elem: item.elem,
-            flex: item.flex,
+            elem: elem,
+            flex: flex,
         });
     };
 
