@@ -58,75 +58,108 @@ You may get white spaces around flex items when they are layouted as `inline-blo
 
 ### Canvas vs Legacy Element
 
-This plugin does text measuring with `<span>` element. As a result, the created `<span>` element must be inserted into document so that we can measure boundings. Text measuring with canvas is easier and will calculate at a higher performace. However, using legacy elements keeps us away from incompatibility :)
+This plugin does text measuring with `<span>` element. As a result, the newly created `<span>` element must be inserted into document so that we can measure boundings. Text measuring with canvas is easier and will calculate at a higher performace. However, using legacy elements keeps us away from incompatibility :)
 
 That's also the reason why I wrote it in es5 flavor.
 
 ## APIs
 
-### new FlexText([options: object])
+### new FlexText()
+
+```ts
+type FlexItem = {
+    elem: Element,
+    flex: number, // flex ratio, likes css `flex-grow` property
+}
+
+type FlexTextOptions = {
+    container?: Element,
+    spacing?: number,
+    items?: FlexItem[],
+}
+
+class FlexText {
+    constructor(options?: FlexTextOptions);
+
+    update(): void;
+    setSpacing(value: number): void;
+    attachTo(container: Element): void;
+    addItem(elem: Element, flex: number = 1): void;
+    removeItem(elem: Element): void;
+    clear(): void;
+    alloc(): Array<{
+        elem: Element,
+        fontSize: number,
+    }>;
+}
+```
 
 Construct new instance with supported options:
 
-#### container: element
+| Field       | Type         | Description            |
+| ----------- | ------------ | ---------------------- |
+| `container` | `Element`    | The element that contains all flex items. You can set container later by calling `instance.attachTo()`. |
+| `spacing`   | `number`     | White space between each item. You can also modify spacing by calling `instance.setSpacing()`. |
+| `items`     | `FlexItem[]` | A list of all flex items inside. You can also add single flex item by calling `instance.addItem()`. |
 
-The element that holds all flex items.
+### instance.update()
 
-You can set container later by calling `instance#attachTo()`
-
-#### spacing: number
-
-White space between each item.
-
-You can also modify spacing by calling `instance#setSpacing()`.
-
-#### items: array
-
-A list of flex items:
-
-```javascript
-[{
-    elem: element,  // the flex item
-    flex: number,   // flex factor, like css flex-grow property
-}, ...]
+```ts
+instance.update(): void
 ```
 
-You can also add single flex item by calling `instance#addItem()`.
+Updates DOM layout at next frame.
 
-### instance#update()
+### instance.setSpacing()
 
-Update DOM layout at next frame.
-
-### instance#setSpacing(value: number)
-
-Change white space between items.
-
-### instance#attachTo(container: element)
-
-Set the container element.
-
-### instance#addItem(elem: element [, flex: number])
-
-Add single flex item, default `flex` is `1`.
-
-### instance#removeItem(elem: element)
-
-Remove item from list by giving `item.elem`.
-
-### instance#clear()
-
-Remove all flex items.
-
-### instance#alloc()
-
-Measuring font-size and returning the result like:
-
-```javascipt
-[{
-    elem: DOMElement,
-    fontSize: 123,
-}, ...]
+```ts
+instance.setSpacing(value: number): void
 ```
+
+Changes white space between flex items.
+
+### instance.attachTo()
+
+```ts
+instance.attachTo(container: Element): void
+```
+
+Sets the container element.
+
+### instance.addItem()
+
+```ts
+instance.addItem(elem: Element, flex: number = 1): void
+```
+
+Adds single flex item.
+
+### instance.removeItem()
+
+```ts
+instance.removeItem(elem: Element): void
+```
+
+Removes specified item from list.
+
+### instance.clear()
+
+```ts
+instance.clear(): void
+```
+
+Removes all flex items.
+
+### instance.alloc()
+
+```ts
+instance.alloc(): Array<{
+    elem: Element,
+    fontSize: number,
+}>
+```
+
+Calculates font sizes for all flex items. This method **WILL NOT** update DOM layout.
 
 ## License
 
